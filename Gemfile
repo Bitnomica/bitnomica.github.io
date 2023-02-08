@@ -19,7 +19,7 @@ gem "minima", "~> 2.5"
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
   gem 'jekyll-asciidoc', '>= 3.0.0'
-  # gem "bulma-clean-theme"
+  gem "bulma-clean-theme"
 end
 
 gem 'asciidoctor', '~> 2.0'
