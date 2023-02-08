@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+
+
+
+<html
+ dir="ltr"
+ lang="en"
+ >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content=#ffffff>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png"
+           href="/favicon.png" 
+    />
+    <script defer src="https://unpkg.com/alpinejs@3.9.0/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@1/bin/bulma-social.min.css">
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>INTEGRATING Lifeshare SDK | Bitnomica</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="INTEGRATING Lifeshare SDK" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://bitnomica.github.io/docs/android_integration/" />
+<meta property="og:url" content="https://bitnomica.github.io/docs/android_integration/" />
+<meta property="og:site_name" content="Bitnomica" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-02-08T11:28:48+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="INTEGRATING Lifeshare SDK" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-02-08T11:28:48+01:00","datePublished":"2023-02-08T11:28:48+01:00","description":"Introduction","headline":"INTEGRATING Lifeshare SDK","mainEntityOfPage":{"@type":"WebPage","@id":"https://bitnomica.github.io/docs/android_integration/"},"url":"https://bitnomica.github.io/docs/android_integration/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- head scripts --></head>
+
+  <body>
+    <nav class="navbar is-primary " x-data="{ openNav: false }">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                Bitnomica
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu" :class="{ 'is-active': openNav }" x-on:click="openNav = !openNav">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu" :class="{ 'is-active': openNav }">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a href="/docs/" class="navbar-link is-active">Documentation</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/docs/ios" class="navbar-item ">Lifeshare SDK iOS</a>
+                            
+                            <a href="/docs/android" class="navbar-item ">Lifeshare SDK Android</a>
+                            
+                            <a href="/docs/web" class="navbar-item ">Lifeshare SDK Web</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a href="" class="navbar-link ">Software</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="https://artifactory.dev.bitnomica.com/ui/packages" class="navbar-item ">Artifactory (Android)</a>
+                            
+                            <a href="https://github.com/Bitnomica/bitnomica-cocoapods" class="navbar-item ">Bitnomica Cocoapods (iOS)</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/support/" class="navbar-item ">Support</a>
+                    
+                
+                
+            </div>
+
+            <div class="navbar-end">
+                
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  is-medium  is-bold is-primary" >
+    <div class="hero-body ">
+        <div class="container">
+            <h1 class="title is-2">INTEGRATING Lifeshare SDK</h1>
+            <p class="subtitle is-3"></p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                
+                <div class="column is-12">
+                    
+                    
+                    
+                    
+                    
+    
+    
+
+<div class="contents">
+    <div class="menu">
+        <p class="menu-label">Contents</p>
+        <ul class="menu-list">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#background">Background</a></li>
+  <li><a href="#gradle-setup">Gradle Setup</a></li>
+  <li><a href="#data-models">Data Models</a></li>
+  <li><a href="#services">Services</a></li>
+  <li><a href="#initialization">Initialization</a></li>
+  <li><a href="#code-examples">Code Examples:</a>
+    <ul>
+      <li><a href="#ui-elements">UI Elements</a></li>
+    </ul>
+  </li>
+</ul>
+    </div>
+</div>
+
+
+
+
+<div class="content">
+    <div class="sect1">
+<h2 id="introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK is a software development dedicated to work with and on the Lifeshare Platform. It contains all that is needed to interact with Lifeshare and make meaningful user interfaces with Interactive Video.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="background">Background</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK consists of three main pieces of code</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Data Models</p>
+</li>
+<li>
+<p>Services</p>
+</li>
+<li>
+<p>UI Elemements</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Data Models contain all models that have meaning in the Lifeshare Ecosystem, such as <code>Channel</code>, <code>Story</code>, <code>Fragment</code>, <code>Video</code> and <code>User</code></p>
+</div>
+<div class="paragraph">
+<p>Services encompasses classes that implement backend request for typical CRUD operations on the data models. Internally we use Retrofit Services, that probably will be familiar to many Android developers.</p>
+</div>
+<div class="paragraph">
+<p>UI Elements contains Views, Fragments and Activities, required for building User Interfaces with Lifeshare, such as Video Player, Submission Manager, GDPR Reporting functionality.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gradle-setup">Gradle Setup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Project level build.gradle:</p>
+</div>
+<div class="paragraph">
+<p>Add the following lines to the corresponding sections:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="gradle"><span class="k">buildscript</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="k">dependencies</span> <span class="o">{</span>
+        <span class="o">...</span>
+        <span class="n">classpath</span> <span class="s2">"org.jfrog.buildinfo:build-info-extractor-gradle:4+"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">allprojects</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s2">"com.jfrog.artifactory"</span>
+<span class="o">}</span>
+
+
+<span class="n">artifactory</span> <span class="o">{</span>
+    <span class="n">contextUrl</span> <span class="o">=</span> <span class="s2">"${artifactory_contextUrl}"</span>   <span class="c1">//The base Artifactory URL if not overridden by the publisher/resolver</span>
+
+    <span class="n">resolve</span> <span class="o">{</span>
+        <span class="n">repository</span> <span class="o">{</span>
+            <span class="n">repoKey</span> <span class="o">=</span> <span class="s1">'gradle-dev'</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="s2">"${artifactory_user}"</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="s2">"${artifactory_password}"</span>
+            <span class="n">maven</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="o">}</span>
+        <span class="n">repository</span> <span class="o">{</span>
+            <span class="n">repoKey</span> <span class="o">=</span> <span class="s1">'gradle-release'</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="s2">"${artifactory_user}"</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="s2">"${artifactory_password}"</span>
+            <span class="n">maven</span> <span class="o">=</span> <span class="kc">true</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>gradle.properties:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="gradle"><span class="o">...</span>
+
+<span class="n">artifactory_user</span><span class="o">=</span><span class="s2">""</span>
+<span class="n">artifactory_password</span><span class="o">=</span><span class="s2">""</span>
+<span class="n">artifactory_contextUrl</span><span class="o">=</span><span class="nl">https:</span><span class="c1">//artifactory.dev.bitnomica.com/artifactory</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Target-level build.gradle</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="o">..</span><span class="p">.</span>
+<span class="nf">dependencies</span> <span class="p">{</span>
+    <span class="o">..</span><span class="p">.</span>
+    <span class="n">implementation</span> <span class="err">'</span><span class="n">com</span><span class="p">.</span><span class="n">bitnomica</span><span class="p">:</span><span class="nc">LifeshareSDK</span><span class="p">:</span><span class="mf">4.0.0</span><span class="err">'</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="data-models">Data Models</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Data models are mostly self documenting, but we refer to other Lifeshare Documentation for more details.</p>
+</div>
+<div class="paragraph">
+<p>In general, Lifeshare serves Channels in a tree-like structure, so a Channel may have zero or more sub-channels. Subchannels may subchannels of themselves.</p>
+</div>
+<div class="paragraph">
+<p>The main playable video element in Lifeshare is called a Story. A Story is an assembly of multiple short video Fragments.</p>
+</div>
+<div class="paragraph">
+<p>As as story contains all metadata required to play in a video player, it is by itself not playable. We need a Playlist for that. A playlist is constructed by our servers, and is in a format our players understands. It contains all instructions such as which video fragments to play and which overlays to show.</p>
+</div>
+<div class="paragraph">
+<p>A Video model is a low-level object which corresponds to an actual video stored on our servers. Lifeshare supports streaming these video files in different formats, sizes and resolutions. Which of those are available will depend on SLA&#8217;s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="services">Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK adopts the <code>RxJava</code> library for reactive programming. This allows use to write concise and responsive code.</p>
+</div>
+<div class="paragraph">
+<p>All Services are implemented as Retrofit <code>&#8230;&#8203;Service</code> protocols. Services that yield a single object will return a <code>Single&lt;Resource&lt;T&gt;&gt;</code> observable. The backend wraps each object in a generic <code>Resource</code> object, that acts as a container. The inner object is available under the '.resource' property.</p>
+</div>
+<div class="paragraph">
+<p>Every endpoint that may yield multiple results, are paginated. This means that it will responds with a limited set of results (i.e. a <code>Page</code>). When you are ready to receive more results, you can request the next page.
+These services return a <code>Single&lt;Resource&lt;Page<a href="#T">[T]</a>&gt;</code> object. All these services have a <code>page</code> and 'perPage` argument for requesting each page of data. A <code>Page`</code> object will contain the items (<code>.items</code>) and an information (<code>.info</code>) object that tells more about the number of results available and the number of pages.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="initialization">Initialization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before requests can be made, LifeshareSDK needs initialization (once), typically in the <code>Application</code> class.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="k">import</span> <span class="nn">com.bitnomica.lifeshare.LifeshareSDK</span>
+
+<span class="kd">class</span> <span class="nc">Application</span><span class="p">:</span> <span class="nc">Application</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="nf">onCreate</span><span class="p">()</span>
+        <span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">setup</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+        <span class="o">..</span><span class="p">.</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="code-examples">Code Examples:</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Calling a Service</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">playlist</span><span class="p">:</span> <span class="nc">Single</span><span class="p">&lt;</span><span class="nc">Playlist</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">getApiCaller</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">StoryService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">playlist</span><span class="p">(</span><span class="s">"1"</span><span class="p">,</span> <span class="s">"1.0.0"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">playlist</span> <span class="p">-&gt;</span>
+        <span class="n">playlist</span><span class="p">.</span><span class="n">resource</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nf">observe</span> <span class="p">{</span> <span class="n">playlist</span> <span class="p">-&gt;</span>
+        <span class="o">..</span><span class="p">.</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Request stories.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">PublisherService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">stories</span><span class="p">(</span><span class="s">"slugs"</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">resource</span> <span class="p">-&gt;</span> <span class="n">resource</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">items</span> <span class="p">}</span>
+    <span class="p">.</span><span class="nf">subscribe</span><span class="p">({</span> <span class="n">items</span> <span class="p">-&gt;</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="p">},</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">addTo</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ui-elements">UI Elements</h3>
+<div class="paragraph">
+<p>A Fullscreen player for a story is presented using a <code>ModalVideoPlayerActivity</code>. To be able to start a player, we need a <code>Playlist`</code>, and a <code>Domain</code> object. Domain encapsulates the configuration that belongs to the specific channel the story belongs to.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">disp</span> <span class="p">=</span> <span class="nc">CompositeDisposable</span><span class="p">()</span>
+<span class="o">..</span><span class="p">.</span>
+
+<span class="kd">val</span> <span class="py">sPlaylist</span><span class="p">:</span> <span class="nc">Single</span><span class="p">&lt;</span><span class="nc">Playlist</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="nc">StoryService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">playlist</span><span class="p">(</span><span class="s">"1"</span><span class="p">,</span> <span class="s">"1.0.0"</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">playlist</span> <span class="p">-&gt;</span>
+        <span class="n">playlist</span><span class="p">.</span><span class="n">resource</span>
+    <span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">sDomain</span><span class="p">:</span> <span class="nc">Single</span><span class="p">&lt;</span><span class="nc">Domain</span><span class="p">&gt;</span> <span class="p">=</span> <span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="nc">PublisherService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">domain</span><span class="p">(</span><span class="s">"125"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="n">resource</span> <span class="p">-&gt;</span> <span class="n">resource</span><span class="p">.</span><span class="n">resource</span> <span class="p">}</span>
+
+<span class="n">sPlaylist</span><span class="p">.</span><span class="nf">zipWith</span><span class="p">(</span><span class="n">sDomain</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">subscribeOn</span><span class="p">(</span><span class="nc">Schedulers</span><span class="p">.</span><span class="nf">io</span><span class="p">())</span>
+    <span class="p">.</span><span class="nf">observeOn</span><span class="p">(</span><span class="nc">AndroidSchedulers</span><span class="p">.</span><span class="nf">mainThread</span><span class="p">())</span>
+    <span class="p">.</span><span class="nf">subscribe</span><span class="p">({</span> <span class="n">pair</span> <span class="p">-&gt;</span>
+        <span class="nf">startActivity</span><span class="p">(</span><span class="nc">Intent</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="nc">ModalVideoPlayerActivity</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">putExtra</span><span class="p">(</span><span class="s">"playlist"</span><span class="p">,</span> <span class="n">pair</span><span class="p">.</span><span class="n">first</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">putExtra</span><span class="p">(</span><span class="s">"config"</span><span class="p">,</span> <span class="n">pair</span><span class="p">.</span><span class="n">second</span><span class="p">.</span><span class="n">playerConfig</span><span class="p">))</span>
+    <span class="p">},</span> <span class="p">{</span> <span class="n">error</span> <span class="p">-&gt;</span>
+        <span class="nc">Log</span><span class="p">.</span><span class="nf">i</span><span class="p">(</span><span class="s">"Main"</span><span class="p">,</span> <span class="s">"Error playlist ${error}"</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nf">addTo</span><span class="p">(</span><span class="n">disp</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="images">Images</h4>
+<div class="paragraph">
+<p>Channels have both a <code>.coverImage</code>, meant to show as a background for a (rectangular) region, for instance a button; and a <code>.logoImage</code>, which can be partially transparent (png) and can be shown as overlay on the background or standalone.</p>
+</div>
+<div class="paragraph">
+<p>Image data can be requested by using the <code>ImageService</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="kotlin"><span class="kd">val</span> <span class="py">sStory</span> <span class="p">=</span> <span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">PublisherService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">stories</span><span class="p">(</span><span class="s">"test"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="p">.</span><span class="nf">flatMap</span> <span class="p">{</span> <span class="n">resource</span> <span class="p">-&gt;</span>
+        <span class="kd">val</span> <span class="py">story</span> <span class="p">=</span> <span class="n">resource</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nc">LifeshareSDK</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nc">ImageService</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">image</span><span class="p">(</span><span class="n">story</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="p">.</span><span class="nf">subscribe</span> <span class="p">{</span> <span class="n">image</span> <span class="p">-&gt;</span>
+        <span class="kd">val</span> <span class="py">imageView</span> <span class="p">=</span> <span class="nc">ImageView</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+        <span class="nc">Glide</span><span class="p">.</span><span class="nf">with</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">into</span><span class="p">(</span><span class="n">imageView</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Other model that provide images:
+<code>User.avatarImageID</code>, <code>User.coverImageID</code>, <code>Story.coverImageID</code>, <code>Video.coverImageID</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class="">Theme built by <a href="https://www.csrhymes.com">C.S. Rhymes</a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>

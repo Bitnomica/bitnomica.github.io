@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+
+
+
+<html
+ dir="ltr"
+ lang="en"
+ >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content=#ffffff>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" type="image/png"
+           href="/favicon.png" 
+    />
+    <script defer src="https://unpkg.com/alpinejs@3.9.0/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@1/bin/bulma-social.min.css">
+    
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Lifeshare SDK - Integration Guidelines | Bitnomica</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Lifeshare SDK - Integration Guidelines" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction" />
+<meta property="og:description" content="Introduction" />
+<link rel="canonical" href="https://bitnomica.github.io/docs/ios_integration/" />
+<meta property="og:url" content="https://bitnomica.github.io/docs/ios_integration/" />
+<meta property="og:site_name" content="Bitnomica" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-02-08T11:28:48+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Lifeshare SDK - Integration Guidelines" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2023-02-08T11:28:48+01:00","datePublished":"2023-02-08T11:28:48+01:00","description":"Introduction","headline":"Lifeshare SDK - Integration Guidelines","mainEntityOfPage":{"@type":"WebPage","@id":"https://bitnomica.github.io/docs/ios_integration/"},"url":"https://bitnomica.github.io/docs/ios_integration/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- head scripts --></head>
+
+  <body>
+    <nav class="navbar is-primary " x-data="{ openNav: false }">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="/" class="navbar-item">
+                Bitnomica
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navMenu" :class="{ 'is-active': openNav }" x-on:click="openNav = !openNav">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="navMenu" :class="{ 'is-active': openNav }">
+            <div class="navbar-start">
+                <a href="/" class="navbar-item ">Home</a>
+                
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a href="/docs/" class="navbar-link is-active">Documentation</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="/docs/ios" class="navbar-item ">Lifeshare SDK iOS</a>
+                            
+                            <a href="/docs/android" class="navbar-item ">Lifeshare SDK Android</a>
+                            
+                            <a href="/docs/web" class="navbar-item ">Lifeshare SDK Web</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <div class="navbar-item has-dropdown is-hoverable ">
+                        <a href="" class="navbar-link ">Software</a>
+                        <div class="navbar-dropdown">
+                            
+                            <a href="https://artifactory.dev.bitnomica.com/ui/packages" class="navbar-item ">Artifactory (Android)</a>
+                            
+                            <a href="https://github.com/Bitnomica/bitnomica-cocoapods" class="navbar-item ">Bitnomica Cocoapods (iOS)</a>
+                            
+                        </div>
+                    </div>
+                    
+                
+                    
+                    <a href="/support/" class="navbar-item ">Support</a>
+                    
+                
+                
+            </div>
+
+            <div class="navbar-end">
+                
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+    
+        <section class="hero  is-medium  is-bold is-primary" >
+    <div class="hero-body ">
+        <div class="container">
+            <h1 class="title is-2">Lifeshare SDK - Integration Guidelines</h1>
+            <p class="subtitle is-3"></p>
+            
+        </div>
+    </div>
+</section>
+    
+    
+
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                
+                <div class="column is-12">
+                    
+                    
+                    
+                    
+                    
+    
+    
+
+<div class="contents">
+    <div class="menu">
+        <p class="menu-label">Contents</p>
+        <ul class="menu-list">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#background">Background</a></li>
+  <li><a href="#cocoapod-integration">Cocoapod integration</a></li>
+  <li><a href="#data-models">Data Models</a></li>
+  <li><a href="#services">Services</a></li>
+  <li><a href="#initialization">Initialization</a>
+    <ul>
+      <li><a href="#example-request">Example Request</a></li>
+      <li><a href="#ui-elements">UI Elements</a></li>
+    </ul>
+  </li>
+</ul>
+    </div>
+</div>
+
+
+
+
+<div class="content">
+    <div class="sect1">
+<h2 id="introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK is a software development dedicated to work with and on the Lifeshare Platform. It contains all that is needed to interact with Lifeshare and make meaningful user interfaces with Interactive Video.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="background">Background</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK consists of three main pieces of code</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Data Models</p>
+</li>
+<li>
+<p>Services</p>
+</li>
+<li>
+<p>UI Elemements</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Data Models contain all models that have meaning in the Lifeshare Ecosystem, such as <code>Channel</code>, <code>Story</code>, <code>Fragment</code>, <code>Video</code> and <code>User</code></p>
+</div>
+<div class="paragraph">
+<p>Services encompasses classes that implement backend request for typical CRUD operations on the data models.</p>
+</div>
+<div class="paragraph">
+<p>UI Elements contains Views and ViewControllers, required for building User Interfaces with Lifeshare, such as Video Player, Submission Manager, GDPR Reporting functionality.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="cocoapod-integration">Cocoapod integration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK is distributed as a cocoapod</p>
+</div>
+<div class="paragraph">
+<p>Add these lines to your <code>Podfile</code> and update: <code>pod install</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>source 'git@github.com:bitnomica/bitnomica-cocoapods.git'
+
+pod 'LifeshareSDK'
+# pod 'LifeshareSDK/Advertising'  # if advertisingmodule is required</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="data-models">Data Models</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Data models are mostly self documenting, but we refer to other Lifeshare Documentation for more details.</p>
+</div>
+<div class="paragraph">
+<p>In general, Lifeshare serves Channels in a tree-like structure, so a Channel may have zero or more sub-channels. Subchannels may subchannels of themselves.</p>
+</div>
+<div class="paragraph">
+<p>The main playable video element in Lifeshare is called a Story. A Story is an assembly of multiple short video Fragments.</p>
+</div>
+<div class="paragraph">
+<p>As as story contains all metadata required to play in a video player, it is by itself not playable. We need a Playlist for that. A playlist is constructed by our servers, and is in a format our players understands. It contains all instructions such as which video fragments to play and which overlays to show.</p>
+</div>
+<div class="paragraph">
+<p>A Video model is a low-level object which corresponds to an actual video stored on our servers. Lifeshare supports streaming these video files in different formats, sizes and resolutions. Which of those are available will depend on SLA&#8217;s.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="services">Services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Lifeshare SDK adopted the <code>ReactiveSwift</code> library for reactive programming. This allows use to write concise and responsive code.</p>
+</div>
+<div class="paragraph">
+<p>All Services are implemented in <code>&#8230;&#8203;Service</code> classes. Services that yield a single object will return a <code>SignalProducer&lt;T, Error&gt;</code> observable (in Rx the equivalent would be <code>Single&lt;T&gt;</code>)</p>
+</div>
+<div class="paragraph">
+<p>Every endpoint that may yield multiple results, are paginated. This means that it will responds with a limited set of results (i.e. a <code>Page</code>). When you are ready to receive more results, you can request the next page.
+These services return a <code>Paginator&lt;T&gt;</code> object. Requesting a page is done by <code>paginator.get(page: Int) &#8594; Page&lt;T&gt;</code>. The page object will contain the items (<code>.items</code>) and an information (<code>.info</code>) object that tells more about the number of results available and the number of pages</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="initialization">Initialization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before requests can be made, LifeshareSDK needs initialization (once), typically in AppDelegate.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="kd">import</span> <span class="kt">LifeshareSDK</span>
+<span class="kt">Lifeshare</span><span class="o">.</span><span class="nf">setup</span><span class="p">(</span><span class="nv">application</span><span class="p">:</span> <span class="n">application</span><span class="p">,</span>
+                <span class="nv">environment</span><span class="p">:</span> <span class="kt">Environment</span><span class="p">(</span><span class="nv">dtap</span><span class="p">:</span> <span class="o">.</span><span class="n">test</span><span class="p">),</span>
+                <span class="nv">theme</span><span class="p">:</span> <span class="kt">DefaultTheme</span><span class="p">())</span></code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="example-request">Example Request</h3>
+<div class="paragraph">
+<p>Get channel</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="kd">import</span> <span class="kt">ReactiveSwift</span>
+<span class="o">...</span>
+
+<span class="kt">PublisherService</span><span class="o">.</span><span class="nf">channel</span><span class="p">(</span><span class="nv">slugs</span><span class="p">:</span> <span class="p">[</span><span class="s">"channel-slug"</span><span class="p">])</span>
+    <span class="o">.</span><span class="nf">request</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">startWithResult</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">channel</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Channels are identified by either their unique <code>.id</code> property or a unique sequence of strings, called <code>.slug</code>. This sequence is constructed by following the path from the root channel to the lead channel and taking the slug from each channel on the path.</p>
+</div>
+<div class="paragraph">
+<p>Get available subchannels</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="kt">PublisherService</span><span class="o">.</span><span class="nf">browse</span><span class="p">(</span><span class="nv">slugs</span><span class="p">:</span> <span class="p">[</span><span class="s">"channel-slug"</span><span class="p">])</span>
+    <span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="nv">page</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">request</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">startWithResult</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">page</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">total</span><span class="p">)</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Get Story</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="kt">PublisherService</span><span class="o">.</span><span class="nf">channel</span><span class="p">(</span><span class="nv">slugs</span><span class="p">:</span> <span class="p">[</span><span class="s">"channel-slug"</span><span class="p">])</span>
+    <span class="o">.</span><span class="nf">request</span><span class="p">()</span>
+    <span class="o">.</span><span class="nf">flatMap</span><span class="p">(</span><span class="o">.</span><span class="n">concat</span><span class="p">)</span> <span class="p">{</span> <span class="n">channel</span> <span class="k">in</span>
+        <span class="kt">PublisherService</span><span class="o">.</span><span class="nf">stories</span><span class="p">(</span><span class="nv">channelId</span><span class="p">:</span> <span class="n">channel</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="nv">page</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">client</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="o">.</span><span class="n">startWithResult</span> <span class="p">{</span> <span class="n">result</span> <span class="k">in</span>
+        <span class="k">switch</span> <span class="n">result</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nf">success</span><span class="p">(</span><span class="k">let</span> <span class="nv">page</span><span class="p">):</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ui-elements">UI Elements</h3>
+<div class="paragraph">
+<p>A Fullscreen player for a story is presented using a <code>PlayerPresenter</code>.</p>
+</div>
+<div class="paragraph">
+<p>This lets a preexisting <code>viewController</code> present a fullscreen player. This is a convenience method that fetched the Playlist for the given story, constructs the PlayerViewModel, creates a PlayerViewController and lets it be presented by the parent <code>viewController</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="kt">PlayerPresenter</span><span class="o">.</span><span class="nf">present</span><span class="p">(</span><span class="nv">story</span><span class="p">:</span> <span class="n">story</span><span class="p">,</span>
+                        <span class="nv">channel</span><span class="p">:</span> <span class="n">channel</span><span class="p">,</span> <span class="nv">presentingViewController</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="images">Images</h4>
+<div class="paragraph">
+<p>Channels have both a <code>.coverImage</code>, meant to show as a background for a (rectangular) region, for instance a button; and a <code>.logoImage</code>, which can be partially transparent (png) and can be shown as overlay on the background or standalone.</p>
+</div>
+<div class="paragraph">
+<p>Image URLs can be requested by using the <code>.coverImageURL: URL</code> property and <code>.logoImageURL</code> property.</p>
+</div>
+<div class="paragraph">
+<p>The same holds for <code>User.avatarImageID</code>, <code>User.coverImageID</code>, <code>Story.coverImageID</code>, <code>Video.coverImageID</code>.
+These URLs can be used to fetch images with your framework of choice.</p>
+</div>
+<div class="paragraph">
+<p>LifeshareSDK also provides its own <code>ImageProvider</code> class that can take care of fetching images and putting them in the right imageView. Using <code>ImageProvider`s</code> is fully optional.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="n">imageView</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="n">story</span><span class="o">.</span><span class="n">coverImageProvider</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will asynchronously fetch the image, and set the <code>UIImageView.image</code> property. The imageProvide is 'bound' to the imageview during the lifetime of the imageview, or until another imageprovider is assigned.</p>
+</div>
+<div class="paragraph">
+<p>Alternatively to use a placeholder image if loading fails:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="n">imageView</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="kt">PictureImageProvider</span><span class="p">(</span><span class="nv">imageID</span><span class="p">:</span> <span class="n">story</span><span class="o">.</span><span class="n">coverImageID</span><span class="p">,</span> <span class="nv">placeholder</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">(</span><span class="s">"placeholder"</span><span class="p">))</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In a view that can be recycled, such as in uitableview or uicollectionview, you need to check whether the cell is still the right one.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="swift"><span class="n">imageView</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="kt">PictureImageProvider</span><span class="p">(</span><span class="nv">imageID</span><span class="p">:</span> <span class="n">story</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="nv">placeholder</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">(</span><span class="s">"placeholder"</span><span class="p">))</span>
+<span class="n">imageView</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="nv">provider</span><span class="p">:</span> <span class="n">story</span><span class="o">.</span><span class="n">coverImageProvider</span><span class="p">,</span> <span class="nv">condition</span><span class="p">:</span> <span class="p">{</span>
+    <span class="n">collectionView</span><span class="o">.</span><span class="nf">isNotCellReused</span><span class="p">(</span><span class="nv">cell</span><span class="p">:</span> <span class="k">self</span><span class="p">,</span> <span class="nv">at</span><span class="p">:</span> <span class="n">indexPath</span><span class="p">)</span>
+<span class="p">})</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If the <code>condition</code> returns false at the time the image is fetched, the image property will not be set.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    
+        <footer class="footer">
+    <div class="container">
+        
+        
+        <div class="columns is-multiline">
+            
+        </div>
+        
+
+        <div class="content is-small has-text-centered">
+            <p class="">Theme built by <a href="https://www.csrhymes.com">C.S. Rhymes</a></p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/assets/js/app.js" type="text/javascript"></script><!-- footer scripts --></body>
+</html>
