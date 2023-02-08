@@ -28,11 +28,22 @@ url: https://bitnomica.github.io # the base hostname & protocol for your site, e
 # github_username:  jekyll
 
 # Build settings
-#theme: minima
-remote_theme: pages-themes/slate@v0.2.0
+# theme: minima
+theme: bulma-clean-theme
+# remote_theme: pages-themes/slate@v0.2.0
+
+#bulma config
+footer_menu: footer
+### end bulma config
+
+minima:
+  skin: dark
+
 plugins:
+  - asciidoctor
   - jekyll-feed
   - jekyll-remote-theme
+  - jekyll-asciidoc
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -54,6 +65,39 @@ plugins:
 #   - vendor/gems/
 #   - vendor/ruby/
 
+# header_pages:
+#   - documentation/index.adoc
+#   - support.adoc
 
+collections:
+  docs:
+    permalink: "/:collection/:path/"
+    output: true
+
+defaults:
+- scope:
+    path: _docs
+    type: docs
+  values:
+    layout: docs
 
 show_downloads: true
+
+# ------------------------------------------------------------------------------
+# Asciidoctor plugin configuration
+#
+asciidoc_attributes:                    &asciidoc_attributes
+ hardbreaks-option:
+ source-highlighter:                   rouge
+ icons:                                font
+ imagesdir:                            /assets/images
+ iconsdir:                             '{imagesdir}/icons/asciidoc'
+ experimental:                         false
+asciidoc:
+ processor:                            asciidoctor
+ require_front_matter_header:          true
+ ext:                                  adoc
+asciidoctor:
+ safe:                                 unsafe
+ template_dir:                         _templates
+ attributes:                           *asciidoc_attributes

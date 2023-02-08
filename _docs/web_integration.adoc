@@ -1,0 +1,85 @@
+---
+layout: page
+toc: true
+---
+
+= Integrating Lifeshare in third-party web-sites
+
+== Use cases
+
+* Embedding a player into your website
+* Full-featured channel browser for publishers
+* Narrowcasting / digital signage
+
+
+=== Embedded Player
+
+Paste the following snippet in your HTML document:
+
+[source,html]
+----
+<iframe src="https://app.vidicrowd.com/story/<STORYID>" width="<WIDTH>" height="<HEIGHT>"  webkitallowfullscreen mozallowfullscreen allowfullscreen/>
+----
+Replace `<STORYID>` with the id of the story you want to play, and `<WIDTH>` and `<HEIGHT>` with the required size on your page. Please maintain an aspect ratio of 16/9 over the width and height. You can also use normal CSS styling to set this size and remove the WIDTH and HEIGHT properties in the iframe tag.
+
+// ignore for now
+// ==== Special Embedded players.
+// The example above always plays the same fixed story. 
+//
+
+
+== Channel Browser
+
+The Channel browser is the easiest solution for publishers to add a video browsing interface to their webites. You reserve some space on the html page and this component will take control over that area and present a full-featured channel browser including main player, search bar and channel navigator.
+
+Channels are presented in a tree-like structure beginning with the topmost 'root'-Channel, and all sub-channels under that.
+
+[source,html]
+----
+<iframe src="https://app.vidicrowd.com//publisher/browse/<CHANNELSLUG>" width="<WIDTH>" height="<HEIGHT>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+    </iframe>
+----
+
+=== Responsive iframe
+
+Above example takes the exact space you give it by the WIDTH and HEIGHT properties or css sizes. Since the iframe often will have more content than fits inside this fixed space, there will be a vertical scrollbar to be able to view the otherwise hidden content.
+
+In many cases, this does not give the right user experience, so we need to be able to adjust the iframe to the size of its contents. Our solution is to add an eventListener that adjusts the height of the iframe as needed.
+
+* Add `embedded` class to the iframe tag. Note that the 300px is just the initial value.
+* Add below javascript.
+
+[source,html]
+----
+<style>
+    iframe#vidicrowd_browser {
+       width: 100%;
+       height: 300px;
+    }
+</style>
+    <iframe src="https://app.vidicrowd.com//publisher/browse/<CHANNELSLUG>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="embedded">
+    </iframe>
+
+    <script type="application/javascript">
+        let iframe = document.querySelector("#vidicrowd_browser");
+
+        window.addEventListener('message', function(e) {
+          if (e.data.type == "iframe_size_changed") {
+            let size = e.data.value;
+            iframe.style.height = size.height + 'px';
+            // iframe.style.width = size.width + 'px';
+          };
+          if (e.data.type == "iframe_did_focus") {
+            var pos = e.data.value;
+            window.scroll({top: pos.y, left: pos.x, behavior: 'smooth'});
+          };
+        }, false);
+    </script>
+----
+
+
+== Narrow-casting / Digital Signage
+
+Our narrowcasing solution uses the same HTML solutions we employ for websites. The most important requirement is that the narrowcasting systems allows loading of webpages for a certain amount of time.
+
+

@@ -1,0 +1,17 @@
+- name: Documentation
+  link: /docs/
+  dropdown: 
+    - name: Lifeshare SDK iOS
+      link: /docs/ios
+    - name: Lifeshare SDK Android
+      link: /docs/android
+    - name: Lifeshare SDK Web
+      link: /docs/web
+- name: Software
+  dropdown:
+  - name: Artifactory (Android)
+    link: https://artifactory.dev.bitnomica.com/ui/packages
+  - name: Bitnomica Cocoapods (iOS)
+    link: https://github.com/Bitnomica/bitnomica-cocoapods
+- name: Support
+  link: /support/
