@@ -29,7 +29,7 @@ url: https://bitnomica.github.io # the base hostname & protocol for your site, e
 
 # Build settings
 # theme: minima
-theme: bulma-clean-theme
+# theme: bulma-clean-theme
 remote_theme: chrisrhymes/bulma-clean-theme
 # remote_theme: pages-themes/slate@v0.2.0
 
