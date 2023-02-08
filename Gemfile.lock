@@ -9,7 +9,6 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    asciidoctor (2.0.18)
     bulma-clean-theme (0.13.1)
       jekyll (>= 3.9, < 5.0)
       jekyll-feed (~> 0.15)
@@ -110,9 +109,6 @@ GEM
       pathutil (~> 0.9)
       rouge (>= 1.7, < 4)
       safe_yaml (~> 1.0)
-    jekyll-asciidoc (3.0.0)
-      asciidoctor (>= 1.5.0)
-      jekyll (>= 3.0.0)
     jekyll-avatar (0.7.0)
       jekyll (>= 3.0, < 5.0)
     jekyll-coffeescript (1.1.1)
@@ -266,11 +262,9 @@ PLATFORMS
   x86_64-darwin-18
 
 DEPENDENCIES
-  asciidoctor (~> 2.0)
   bulma-clean-theme
   github-pages (~> 228)
   http_parser.rb (~> 0.6.0)
-  jekyll-asciidoc (>= 3.0.0)
   jekyll-feed (~> 0.12)
   minima (~> 2.5)
   tilt (~> 2.0)
