@@ -1,7 +1,6 @@
 ---
 layout: page
 toc: true
-title: Lifeshare SDK Android Integration
 ---
 
 ## Introduction
@@ -50,12 +49,6 @@ artifactory {
 
     resolve {
         repository {
-            repoKey = 'gradle-dev'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true
-        }
-        repository {
             repoKey = 'gradle-release'
             username = "${artifactory_user}"
             password = "${artifactory_password}"
@@ -64,6 +57,8 @@ artifactory {
     }
 }
 ```
+
+Artifactory can generate this snippets for you. Hit
 
 gradle.properties:
 
@@ -77,12 +72,18 @@ artifactory_contextUrl=https://artifactory.dev.bitnomica.com/artifactory
 
 Target-level build.gradle
 
-``` kotlin
+``` gradle
 ...
 dependencies {
     ...
     implementation 'com.bitnomica:LifeshareSDK:4.0.0'
 }
+```
+
+Note the examples in this file may use RXKotlin
+
+``` gradle
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 ```
 
 ## Data Models
@@ -105,7 +106,7 @@ All Services are implemented as Retrofit `…​Service` protocols. Services tha
 
 Every endpoint that may yield multiple results, are paginated. This means that it will responds with a limited set of results (i.e. a `Page`). When you are ready to receive more results, you can request the next page. These services return a `Single<Resource<Page>` object. All these services have a `page` and 'perPage\` argument for requesting each page of data. A `` Page` `` object will contain the items (`.items`) and an information (`.info`) object that tells more about the number of results available and the number of pages.
 
-## Initialization
+# Initialization
 
 Before requests can be made, LifeshareSDK needs initialization (once), typically in the `Application` class.
 
@@ -115,7 +116,7 @@ import com.bitnomica.lifeshare.LifeshareSDK
 class Application: Application() {
     override fun onCreate() {
         super.onCreate()
-        LifeshareSDK.setup(this)
+        LifeshareSDK.setup(this) // or LifeshareSDK.setup(this, "production")
         ...
     }
 }
@@ -154,20 +155,29 @@ LifeshareSDK.request(this, PublisherService::class.java)
 
 A Fullscreen player for a story is presented using a `ModalVideoPlayerActivity`. To be able to start a player, we need a `` Playlist` ``, and a `Domain` object. Domain encapsulates the configuration that belongs to the specific channel the story belongs to.
 
-Example:
+You can use the following convenience method:
+
+``` kotlin
+val storyId "159"
+val channelId = "126"
+
+StoryServiceHelper.openPlayer(context, storyId, channelId)
+```
+
+or the more complete example:
 
 ``` kotlin
 val disp = CompositeDisposable()
 ...
 
 val sPlaylist: Single<Playlist> = LifeshareSDK.request(context, StoryService::class.java)
-    .playlist("1", "1.0.0")
+    .playlist(storyId, "1.0.0")
     .map { playlist ->
         playlist.resource
     }
 
 val sDomain: Single<Domain> = LifeshareSDK.request(context, PublisherService::class.java)
-    .domain("125", "")
+    .domain(channelId, "")
     .map { resource -> resource.resource }
 
 sPlaylist.zipWith(sDomain)
@@ -183,7 +193,7 @@ sPlaylist.zipWith(sDomain)
     .addTo(disp)
 ```
 
-## Images
+### Images
 
 Channels have both a `.coverImage`, meant to show as a background for a (rectangular) region, for instance a button; and a `.logoImage`, which can be partially transparent (png) and can be shown as overlay on the background or standalone.
 
