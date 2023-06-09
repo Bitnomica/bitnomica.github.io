@@ -21,16 +21,16 @@ Paste the following snippet in your HTML document:
 
   <div id="player"></div>
   <script type="application/javascript">
-    var player = LifeshareSDK.Player("player", "<STORYID>", <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+    var player = LifeshareSDK.Player("player", "<SRC>", <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
     player.addEventListener("player_ended", (e) => {
       console.log("Player Ended!");
     });
   </script>
 ```
 
-This constructs a new player iframe and add that to the DOM-element with id: "player". Replace `<STORYID>` with the id of the story you want to play, and `<WIDTH>` and `<HEIGHT>` with the required CSS size on your page. If any of them is omitted, "100%" is used.
+This constructs a new player iframe and add that to the DOM-element with id: "player". Replace `<SRC>` with the id of the story you want to play, and `<WIDTH>` and `<HEIGHT>` with the required CSS size on your page. If any of them is omitted, "100%" is used.
 
-Arguments for Player:
+Arguments for `Player`:
 
 ``` javascript
 LifeshareSDK.Player(
@@ -62,6 +62,20 @@ Arguments:
 - \- `string`: the player loads interprets the string as a Story.id, and plays the respective story.
 
 - \- `object`: `{ 'url': <url> }`, the player loads the url which should point to a (dynamic) story.
+
+Examples for dynamic sources:
+
+``` javascript
+// loads the latest (featured) story under the <ROOT> channel.
+LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/featured/0"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+
+
+// loads the one but latest (featured) story under the <ROOT> channel.
+LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/featured/1"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+
+// loads the latest (featured) story under the <ROOT>/<SUB> channel.
+LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/<SUB>featured/0"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+```
 
 The player sends the "player_ended" event when the player has stopped playing, or an error has occurred.
 
@@ -120,9 +134,11 @@ Example:
 
   <div id="player"></div>
   <script type="application/javascript">
-    var player = LifeshareSDK.Player("player", "<STORYID>", <WIDTH>, <HEIGHT>, "noninteractive");
+    var player = LifeshareSDK.Player("player", "<SRC>", <WIDTH>, <HEIGHT>, "noninteractive");
     player.addEventListener("player_ended", (e) => {
       console.log("Player Ended!");
     });
   </script>
 ```
+
+# Sources
