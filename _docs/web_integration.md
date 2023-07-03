@@ -17,11 +17,11 @@ title: Lifeshare SDK Web Integration
 Paste the following snippet in your HTML document:
 
 ``` html
-  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js">
+  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js" />
 
   <div id="player"></div>
   <script type="application/javascript">
-    var player = LifeshareSDK.Player("player", "<SRC>", <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+    var player = new LifeshareSDK.Player("player", "<SRC>", <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
     player.addEventListener("player_ended", (e) => {
       console.log("Player Ended!");
     });
@@ -67,14 +67,14 @@ Examples for dynamic sources:
 
 ``` javascript
 // loads the latest (featured) story under the <ROOT> channel.
-LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/featured/0"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+new LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/featured/0"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
 
 
 // loads the one but latest (featured) story under the <ROOT> channel.
-LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/featured/1"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+new LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/featured/1"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
 
 // loads the latest (featured) story under the <ROOT>/<SUB> channel.
-LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/<SUB>featured/0"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
+new LifeshareSDK.Player("player", {'url': "https://app.vidicrowd.com/publisher/channels/<ROOT>/<SUB>featured/0"}, <WIDTH>, <HEIGHT>, <MODE>, <AUTOPLAY>);
 ```
 
 The player sends the "player_ended" event when the player has stopped playing, or an error has occurred.
@@ -86,7 +86,7 @@ The Channel browser is the easiest solution for publishers to add a video browsi
 Channels are presented in a tree-like structure beginning with the topmost 'root'-Channel, and all sub-channels under that.
 
 ``` html
-  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js">
+  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js" />
   <div id="browser"></div>
   <script type="application/javascript">
     var browser = new LifeshareSDK.Browser("browser", <SLUGS>, <WIDTH>, <HEIGHT>, <RESPONSIVE>)
@@ -130,11 +130,11 @@ The player has a special mode "noninteractive", which takes care of these consid
 Example:
 
 ``` html
-  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js">
+  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js" />
 
   <div id="player"></div>
   <script type="application/javascript">
-    var player = LifeshareSDK.Player("player", "<SRC>", <WIDTH>, <HEIGHT>, "noninteractive");
+    var player = new LifeshareSDK.Player("player", "<SRC>", <WIDTH>, <HEIGHT>, "noninteractive");
     player.addEventListener("player_ended", (e) => {
       console.log("Player Ended!");
     });
