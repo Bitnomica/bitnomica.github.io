@@ -17,7 +17,7 @@ title: Lifeshare SDK Web Integration
 Paste the following snippet in your HTML document:
 
 ``` html
-  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js" />
+  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js"></script>
 
   <div id="player"></div>
   <script type="application/javascript">
@@ -86,7 +86,7 @@ The Channel browser is the easiest solution for publishers to add a video browsi
 Channels are presented in a tree-like structure beginning with the topmost 'root'-Channel, and all sub-channels under that.
 
 ``` html
-  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js" />
+  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js"></script>
   <div id="browser"></div>
   <script type="application/javascript">
     var browser = new LifeshareSDK.Browser("browser", <SLUGS>, <WIDTH>, <HEIGHT>, <RESPONSIVE>)
@@ -130,7 +130,7 @@ The player has a special mode "noninteractive", which takes care of these consid
 Example:
 
 ``` html
-  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js" />
+  <script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js"></script>
 
   <div id="player"></div>
   <script type="application/javascript">
