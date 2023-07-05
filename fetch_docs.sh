@@ -31,4 +31,5 @@ toc: true
 
 convert ../lifeshare-sdk-ios/INTEGRATION.adoc $TARGET/ios_integration.md
 convert ../lifeshare-sdk-android/INTEGRATION.adoc $TARGET/android_integration.md
-convert ../lifeshare-web/INTEGRATION.adoc $TARGET/web_integration.md
+# convert ../lifeshare-web/INTEGRATION.adoc $TARGET/web_integration.md
+cp -a ../lifeshare-web/out/* _docs/web_sdk/

@@ -1,10 +1,8 @@
 ---
 layout: page
 toc: true
-title: Lifeshare SDK Web Integration
----
 
-## Use cases
+# Use cases
 
 - Embedding a player into your website
 

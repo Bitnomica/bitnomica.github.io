@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Player</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Player</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-LifeshareSDK.html">LifeshareSDK</a>~</span>Player<span class="signature">(containerId, src, width, height, mode, autoplay)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Player Class</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="Player"><span class="type-signature"></span>new Player<span class="signature">(containerId, src, width, height, mode, autoplay)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p><code>source</code> can be one of:</p>
+<ul>
+<li><code>string</code>: the player loads interprets the string as a Story.id, and plays the respective story.</li>
+<li><code>object</code>: <code>{ 'story': &lt;id&gt; }</code>, the player loads the story  into the iframe.</li>
+<li><code>object</code>: <code>{ 'channel': {   'slugs': [&lt;SLUGS&gt;, ...],   'type': &lt;TYPE&gt;,   'offset': &lt;OFFSET&gt; }</code>,
+the player loads the latest story from the specified channel into the iframe. Read more below.</li>
+<li><code>object</code>: <code>{ 'url': &lt;url&gt; }</code>, the player loads the story specified with urlinto the iframe. Url which should point to a (dynamic) story.</li>
+</ul>
+<h3>Loading from a channel</h3>
+<p><code>Player</code> supports several advanced methods for loading stories from a Channel. Currently supported are:</p>
+<ul>
+<li>Case 1. <code>direct</code>: Loading the latest story from a specific channel (only stories that are directly contained in the channel, but not in the subchannels)</li>
+<li>Case 2. <code>sub</code>: Loading the latest story from a specific channel OR any of the subchannels.</li>
+</ul>
+<p>Also supported is to use an offset. With an offset=1, the player loads the one-but-newest story, etc...</p>
+<p>Case 1:</p>
+<pre class="prettyprint source"><code>  {
+     'channel': {
+       'slugs': [&lt;SLUGS>, ...],
+       'type': 'direct',
+       'offset': &lt;OFFSET=0>
+      }
+  }
+</code></pre>
+<p>Case 2:</p>
+<pre class="prettyprint source"><code>   {
+     'channel': {
+       'slugs': [&lt;SLUGS>, ...],
+       'type': 'sub',
+       'offset': &lt;OFFSET=0>
+      }
+   }
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>containerId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The <code>id</code> of a container element in the DOM</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>src</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The source you want to play</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the preferred CSS width of the player. Use <code>null</code> for autofit</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the preferred CSS height of the player. Use <code>null</code> for autofit</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>mode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>one of: &quot;default&quot;, &quot;noninteractive&quot;, &quot;modal&quot;</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>autoplay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>start playing automatically. noninteractive also means autoplay is on. Default is false</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;script type="application/javascript" src="https://app.vidicrowd.com/scripts/lifesharesdk-v3.js">
+
+&lt;div id="player">&lt;/div>
+&lt;script type="application/javascript">
+  var player = LifeshareSDK.Player("player", "7", "800px", "450px", "default", false);
+  player.addEventListener("player_ended", (e) => {
+    console.log("Player Ended!");
+  });
+&lt;/script></code></pre>
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>IFrameComponent</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-LifeshareSDK.html">LifeshareSDK</a></li></ul><h3>Classes</h3><ul><li><a href="module-LifeshareSDK-Browser.html">Browser</a></li><li><a href="module-LifeshareSDK-IFrameComponent.html">IFrameComponent</a></li><li><a href="module-LifeshareSDK-Player.html">Player</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jul 05 2023 15:12:41 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,13 +1,12 @@
 ---
 layout: page
 toc: true
----
 
-## Introduction
+# Introduction
 
 Lifeshare SDK is a software development dedicated to work with and on the Lifeshare Platform. It contains all that is needed to interact with Lifeshare and make meaningful user interfaces with Interactive Video.
 
-## Background
+# Background
 
 Lifeshare SDK consists of three main pieces of code
 
@@ -23,7 +22,7 @@ Services encompasses classes that implement backend request for typical CRUD ope
 
 UI Elements contains Views, Fragments and Activities, required for building User Interfaces with Lifeshare, such as Video Player, Submission Manager, GDPR Reporting functionality.
 
-## Gradle Setup
+# Gradle Setup
 
 Project level build.gradle:
 
@@ -86,7 +85,7 @@ Note the examples in this file may use RXKotlin
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 ```
 
-## Data Models
+# Data Models
 
 Data models are mostly self documenting, but we refer to other Lifeshare Documentation for more details.
 
@@ -98,7 +97,7 @@ As as story contains all metadata required to play in a video player, it is by i
 
 A Video model is a low-level object which corresponds to an actual video stored on our servers. Lifeshare supports streaming these video files in different formats, sizes and resolutions. Which of those are available will depend on SLA’s.
 
-## Services
+# Services
 
 Lifeshare SDK adopts the `RxJava` library for reactive programming. This allows use to write concise and responsive code.
 
@@ -122,7 +121,7 @@ class Application: Application() {
 }
 ```
 
-## Code Examples:
+# Code Examples:
 
 Calling a Service
 
@@ -197,16 +196,21 @@ sPlaylist.zipWith(sDomain)
 
 Channels have both a `.coverImage`, meant to show as a background for a (rectangular) region, for instance a button; and a `.logoImage`, which can be partially transparent (png) and can be shown as overlay on the background or standalone.
 
-Image data can be requested by using the `ImageService`.
+The easiest way is to use the `ImageServiceHelper` class. This example loads the `coverImage` for a given story and loads it into the `ImageView`: Size should be the size of the imageView in pixels, or an approximation thereof. Omitting `size` is discouraged.
 
 ``` kotlin
-val sStory = LifeshareSDK.request(this, PublisherService::class.java)
-    .stories("test", 0, 20)
-    .flatMap { resource ->
-        val story = resource.resource.items[0]
-        LifeshareSDK.request(this, ImageService::class.java)
-            .image(story.id, 400, 400)
-    }
+story.coverImageId?.let {
+    ImageServiceHelper.setImage(context, it, Size(400, 400), imageView)
+}
+```
+
+Alternatively, image data can be requested by using the `ImageService`.
+
+``` kotlin
+LifeshareSDK.request(this, ImageService::class.java)
+    .subscribeOn(Schedulers.io())
+    .image(imageId, 400, 400)
+    .observeOn(AndroidSchedulers.mainThread())
     .subscribe { image ->
         val imageView = ImageView(this)
         Glide.with(this)

@@ -1,14 +1,12 @@
 ---
 layout: page
 toc: true
-title: Lifeshare SDK Android Integration
----
 
-## Introduction
+# Introduction
 
 Lifeshare SDK is a software development dedicated to work with and on the Lifeshare Platform. It contains all that is needed to interact with Lifeshare and make meaningful user interfaces with Interactive Video.
 
-## Background
+# Background
 
 Lifeshare SDK consists of three main pieces of code
 
@@ -24,7 +22,7 @@ Services encompasses classes that implement backend request for typical CRUD ope
 
 UI Elements contains Views and ViewControllers, required for building User Interfaces with Lifeshare, such as Video Player, Submission Manager, GDPR Reporting functionality.
 
-## Cocoapod integration
+# Cocoapod integration
 
 Lifeshare SDK is distributed as a cocoapod
 
@@ -35,7 +33,7 @@ Add these lines to your `Podfile` and update: `pod install`
     pod 'LifeshareSDK'
     # pod 'LifeshareSDK/Advertising'  # if advertisingmodule is required
 
-## Data Models
+# Data Models
 
 Data models are mostly self documenting, but we refer to other Lifeshare Documentation for more details.
 
@@ -47,15 +45,15 @@ As as story contains all metadata required to play in a video player, it is by i
 
 A Video model is a low-level object which corresponds to an actual video stored on our servers. Lifeshare supports streaming these video files in different formats, sizes and resolutions. Which of those are available will depend on SLA’s.
 
-## Services
+# Services
 
 Lifeshare SDK adopted the `ReactiveSwift` library for reactive programming. This allows use to write concise and responsive code.
 
-All Services are implemented in `…​Service` classes. Services that yield a single object will return a `SignalProducer<T, Error>` observable (in Rx the equivalent would be `Single<T>`)
+All Services are implemented in `…​Service` classes. Services that yield a sinlgle object will return a `SignalProducer<T, Error>` observable (in Rx the equivalent would be `Single<T>`)
 
 Every endpoint that may yield multiple results, are paginated. This means that it will responds with a limited set of results (i.e. a `Page`). When you are ready to receive more results, you can request the next page. These services return a `Paginator<T>` object. Requesting a page is done by `paginator.get(page: Int) → Page<T>`. The page object will contain the items (`.items`) and an information (`.info`) object that tells more about the number of results available and the number of pages
 
-## Initialization
+# Initialization
 
 Before requests can be made, LifeshareSDK needs initialization (once), typically in AppDelegate.
 
@@ -136,7 +134,7 @@ PlayerPresenter.present(story: story,
                         channel: channel, presentingViewController: viewController)
 ```
 
-## Images
+### Images
 
 Channels have both a `.coverImage`, meant to show as a background for a (rectangular) region, for instance a button; and a `.logoImage`, which can be partially transparent (png) and can be shown as overlay on the background or standalone.
 
