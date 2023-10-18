@@ -4,4 +4,4 @@ title: Lifeshare SDK for Web (HTML)
 ---
 
 # Further reading
-* [Lifeshare Web SDK Integration Guide](/docs/web_sdk/)
+* [Lifeshare Web SDK Documentation](/docs/web_sdk/)
