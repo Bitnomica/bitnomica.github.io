@@ -1,6 +1,8 @@
 ---
+title: Android Integration
 layout: page
 toc: true
+---
 
 # Introduction
 

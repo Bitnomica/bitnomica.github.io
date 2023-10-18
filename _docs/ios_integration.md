@@ -1,7 +1,8 @@
 ---
+title: IOS Integration
 layout: page
 toc: true
-
+---
 # Introduction
 
 Lifeshare SDK is a software development dedicated to work with and on the Lifeshare Platform. It contains all that is needed to interact with Lifeshare and make meaningful user interfaces with Interactive Video.
@@ -22,7 +23,9 @@ Services encompasses classes that implement backend request for typical CRUD ope
 
 UI Elements contains Views and ViewControllers, required for building User Interfaces with Lifeshare, such as Video Player, Submission Manager, GDPR Reporting functionality.
 
-# Cocoapod integration
+# Integration
+
+## Cocoapod integration
 
 Lifeshare SDK is distributed as a cocoapod
 
@@ -32,6 +35,10 @@ Add these lines to your `Podfile` and update: `pod install`
 
     pod 'LifeshareSDK'
     # pod 'LifeshareSDK/Advertising'  # if advertisingmodule is required
+
+## Swift Package Manager
+
+Add this url as a package dependency in XCode or in your Packages.swift: `git@github.com:bitnomica/lifeshare-sdk-ios.git` or `https://github.com/bitnomica/lifeshare-sdk-ios.git` It is best to use `up to next Major version`
 
 # Data Models
 
