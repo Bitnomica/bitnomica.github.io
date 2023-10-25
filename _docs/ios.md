@@ -25,20 +25,48 @@ UI Elements contains Views and ViewControllers, required for building User Inter
 
 # Integration
 
+We support both Cocoapod integration and SPM (Swift Package Manager). Cocoapod support will be removed in the near future.
+
 ## Cocoapod integration
 
 Lifeshare SDK is distributed as a cocoapod
 
 Add these lines to your `Podfile` and update: `pod install`
 
-    source 'git@github.com:bitnomica/bitnomica-cocoapods.git'
+    source 'git@git.dev.bitnomica.com:repo/cocoapods.git'
 
     pod 'LifeshareSDK'
     # pod 'LifeshareSDK/Advertising'  # if advertisingmodule is required
 
 ## Swift Package Manager
 
-Add this url as a package dependency in XCode or in your Packages.swift: `git@github.com:bitnomica/lifeshare-sdk-ios.git` or `https://github.com/bitnomica/lifeshare-sdk-ios.git` It is best to use `up to next Major version`
+LifeshareSDK is served from a private GIT repository (git.dev.bitnomica.com). Since this is no public server, a SSH key is required to access the repository. A key can be obtained by contacting sales.
+
+XCode is a bit tough on ssh-keys. The proper way to install the key is as follows:
+
+1.  Close XCode completely (all windows)
+
+2.  Copy the obtained key to ~/.ssh/git-dev-bitnomica-com
+
+3.  run `ssh-add --apple-use-keychain ~/.ssh/git-dev-bitnomica-com`
+
+4.  Start XCode and open your project.
+
+5.  Add a new package dependency for your project. Add this url as a package dependency in XCode or in your Packages.swift: `git@git.dev.bitnomica.com:/home/git/repo/lifeshare-sdk-ios.git`
+
+6.  Select LifeshareSDK (and LifeshareSDKAdvertising if required) to your target. We recommend to use `up to next Major version` and use the latest version
+
+7.  Build
+
+# CI Integration
+
+**IMPORTANT** Read <https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows>
+
+In essence this boils down to:
+
+1.  Make sure the git.dev.bitnomica.com public host key is added to the known_hosts file.
+
+2.  Make sure the SSH Key is added to the SSH Agent before running xcodebuild
 
 # Data Models
 
@@ -141,7 +169,7 @@ PlayerPresenter.present(story: story,
                         channel: channel, presentingViewController: viewController)
 ```
 
-### Images
+## Images
 
 Channels have both a `.coverImage`, meant to show as a background for a (rectangular) region, for instance a button; and a `.logoImage`, which can be partially transparent (png) and can be shown as overlay on the background or standalone.
 
