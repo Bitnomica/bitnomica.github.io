@@ -30,44 +30,25 @@ Project level build.gradle:
 Add the following lines to the corresponding sections:
 
 ``` gradle
-buildscript {
-    ...
-    dependencies {
-        ...
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
-    }
-}
-
 allprojects {
     ...
-    apply plugin: "com.jfrog.artifactory"
-}
-
-
-artifactory {
-    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
-
-    resolve {
-        repository {
-            repoKey = 'gradle-release'
-            username = "${artifactory_user}"
-            password = "${artifactory_password}"
-            maven = true
-        }
+    maven {
+      url "https://maven.dev.bitnomica.com/releases"
+      credentials {
+        username  "${bitnomicaReleasesUsername}"
+        password = "${bitnomicaReleasesPassword}"
+      }
     }
+    ...
 }
 ```
 
-Artifactory can generate this snippets for you. Hit
-
-gradle.properties:
+Insert the following snippet in your local `gradle.properties`. Replace the username and password with the credentials provided by us:
 
 ``` gradle
 ...
-
-artifactory_user=""
-artifactory_password=""
-artifactory_contextUrl=https://artifactory.dev.bitnomica.com/artifactory
+bitnomicaReleasesUsername=<username>
+bitnomicaReleasesPassword=<password>
 ```
 
 Target-level build.gradle
@@ -76,11 +57,15 @@ Target-level build.gradle
 ...
 dependencies {
     ...
-    implementation 'com.bitnomica:LifeshareSDK:4.0.0'
+    implementation 'com.bitnomica:LifeshareSDK:4.0.8'
 }
 ```
 
-Note the examples in this file may use RXKotlin
+<div class="note">
+
+the examples in this file may use RXKotlin
+
+</div>
 
 ``` gradle
     implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
@@ -104,7 +89,7 @@ Lifeshare SDK adopts the `RxJava` library for reactive programming. This allows 
 
 All Services are implemented as Retrofit `…​Service` protocols. Services that yield a single object will return a `Single<Resource<T>>` observable. The backend wraps each object in a generic `Resource` object, that acts as a container. The inner object is available under the '.resource' property.
 
-Every endpoint that may yield multiple results, are paginated. This means that it will responds with a limited set of results (i.e. a `Page`). When you are ready to receive more results, you can request the next page. These services return a `Single<Resource<Page>` object. All these services have a `page` and 'perPage\` argument for requesting each page of data. A `` Page` `` object will contain the items (`.items`) and an information (`.info`) object that tells more about the number of results available and the number of pages.
+Every endpoint that may yield multiple results, are paginated. This means that it will responds with a limited set of results (i.e. a `Page`). When you are ready to receive more results, you can request the next page. These services return a `Single<Resource<Page>` object. All these services have a `page` and `perPage` argument for requesting each page of data. A `Page` object will contain the items (`.items`) and an information (`.info`) object that tells more about the number of results available and the number of pages.
 
 # Initialization
 
