@@ -160,13 +160,22 @@ PublisherService.channel(slugs: ["channel-slug"])
 
 ## UI Elements
 
-A Fullscreen player for a story is presented using a `PlayerPresenter`.
+A Fullscreen player for a story is presented using `ModalPlayerPresenter`.
 
-This lets a preexisting `viewController` present a fullscreen player. This is a convenience method that fetched the Playlist for the given story, constructs the PlayerViewModel, creates a PlayerViewController and lets it be presented by the parent `viewController`.
+`ModalPlayerPresenter` is a protocol that can be implemented by any ViewController. `ModalPlayerPresenter` provides a default implementation for presenting a `` PlayerViewModel` `` or a `Story`. You can use this by decorating your own presenting ViewController class with a `ModalPlayerPresenter` protocol and calling the `.present(…​)` method somewhere in a class method implementation
+
+Example:
 
 ``` swift
-PlayerPresenter.present(story: story,
-                        channel: channel, presentingViewController: viewController)
+class MyViewControlller: UIViewController, ModalPlayerPresenter {
+    ...
+
+    func ... {
+        ...
+        self.present(story: story, channel: channel)
+        ...
+    }
+}
 ```
 
 ## Images
